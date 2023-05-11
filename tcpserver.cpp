@@ -36,7 +36,7 @@ int main() {
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
     StreamSocket sock(sa);
-    cout << "Welcome to POCO TCP server. Enter you string:" << endl;
+    cout << "Welcome to POCO TCP server. Enter your string:" << endl;
     while (1) {
       string data;
       cout << "Input by a person" << endl << "<";
