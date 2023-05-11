@@ -1,0 +1,2 @@
+clear
+g++ -std=c++14 -I /home/ubuntu/dev/poco-1.12.4-all/Foundation/include -I /home/ubuntu/dev/poco-1.12.4-all/Net/include -I /home/ubuntu/dev/poco-1.12.4-all/NetSSL_OpenSSL/include -I /home/ubuntu/dev/poco-1.12.4-all/Data/include -I /home/ubuntu/dev/poco-1.12.4-all/Util/include -I /home/ubuntu/dev/poco-1.12.4-all/JSON/include -I /home/ubuntu/dev/poco-1.12.4-all/Encodings/include -L /home/ubuntu/dev/poco-1.12.4-all/lib/Linux/x86_64 -lPocoData -lPocoEncodings -lPocoFoundation -lPocoJSON -lPocoNet  -lPocoNetSSL -lPocoUtil  ./tcpserver.cpp
