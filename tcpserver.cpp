@@ -28,20 +28,26 @@ public:
 };
 
 int main() {
-    TCPServer srv(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
-    srv.start();
+    TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
+    server.start();
 
-    SocketAddress sa("localhost", srv.socket().address().port());
+    uint portNo = server.socket().address().port();
+    //uint portNo = 28888;
+    SocketAddress sa("localhost", portNo);
+    cout << "Port no. to be assigned: " << portNo << endl;
     StreamSocket sock(sa);
+    cout << "Welcome to POCO TCP server. Enter you string:" << endl;
     while (1) {
-      string data;	    
-      //string data("hello, world");
+      string data;
+      cout << "Input by a person" << endl << "<";
       cin >> data;
+      reverse(data.begin(), data.end());
       sock.sendBytes(data.data(), (int)data.size());
       char buffer[256] = {0};
       int n = sock.receiveBytes(buffer, sizeof(buffer));
+      cout << "Output by server" << endl << ">";
       cout << string(buffer, n) << endl;
     }
 
-    srv.stop();
+    server.stop();
 }

@@ -1,2 +1,6 @@
+#!/bin/bash
 clear
-g++ -std=c++14 -I /home/ubuntu/dev/poco-1.12.4-all/Foundation/include -I /home/ubuntu/dev/poco-1.12.4-all/Net/include -I /home/ubuntu/dev/poco-1.12.4-all/NetSSL_OpenSSL/include -I /home/ubuntu/dev/poco-1.12.4-all/Data/include -I /home/ubuntu/dev/poco-1.12.4-all/Util/include -I /home/ubuntu/dev/poco-1.12.4-all/JSON/include -I /home/ubuntu/dev/poco-1.12.4-all/Encodings/include -L /home/ubuntu/dev/poco-1.12.4-all/lib/Linux/x86_64 -lPocoData -lPocoEncodings -lPocoFoundation -lPocoJSON -lPocoNet  -lPocoNetSSL -lPocoUtil  ./tcpserver.cpp
+#sudo apt-get install g++
+#sudo apt-get install libssl-dev
+#sudo apt-get install libpoco-dev
+g++ -std=c++14 ./tcpserver.cpp -o telnet -lPocoFoundation -lPocoNet -lPocoUtil 
