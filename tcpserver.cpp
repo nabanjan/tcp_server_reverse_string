@@ -39,13 +39,13 @@ int main() {
     cout << "Welcome to POCO TCP server. Enter your string:" << endl;
     while (1) {
       string data;
-      cout << "Input by a person" << endl << "<";
+      cout << "Input by a person" << endl;
       cin >> data;
       reverse(data.begin(), data.end());
       sock.sendBytes(data.data(), (int)data.size());
       char buffer[256] = {0};
       int n = sock.receiveBytes(buffer, sizeof(buffer));
-      cout << "Output by server" << endl << ">";
+      cout << "Output by server" << endl;
       cout << string(buffer, n) << endl;
     }
 
