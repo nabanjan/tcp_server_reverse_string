@@ -33,11 +33,15 @@ int main() {
 
     SocketAddress sa("localhost", srv.socket().address().port());
     StreamSocket sock(sa);
-    string data("hello, world");
-    sock.sendBytes(data.data(), (int) data.size());
-    char buffer[256] = {0};
-    int n = sock.receiveBytes(buffer, sizeof(buffer));
-    cout << string(buffer, n) << endl;
+    while (1) {
+      string data;	    
+      //string data("hello, world");
+      cin >> data;
+      sock.sendBytes(data.data(), (int)data.size());
+      char buffer[256] = {0};
+      int n = sock.receiveBytes(buffer, sizeof(buffer));
+      cout << string(buffer, n) << endl;
+    }
 
     srv.stop();
 }
