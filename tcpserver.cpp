@@ -22,8 +22,6 @@ public:
       char *buffer = new char[256];
       buffer[256] = {0};
       int c = sock.receiveBytes(buffer, sizeof(buffer));
-      time_t start_time;
-      time_t end_time;
       while (c > 0) {
         string data(buffer);
         reverse(data.begin(), data.end());
@@ -32,9 +30,7 @@ public:
         buffer = new char[256];
         buffer[256] = {0};
 	delete [] temp_buffer;
-	start_time = time(NULL);
         c = sock.receiveBytes(buffer, sizeof(buffer));
-	end_time = time(NULL);
       }
     } catch (Exception& e) { 
       cerr << "ReverseStringConnection: " << e.displayText() << endl;
