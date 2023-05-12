@@ -63,7 +63,6 @@ void test(uint portNo) {
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
     StreamSocket sock(sa);
-    cout << "Welcome to POCO TCP server running on port: " << portNo << ". Enter your string:" << endl;
     while (true) {
       string data;
       cin >> data;
@@ -78,9 +77,10 @@ int main() {
     signal(SIGINT, signal_callback_handler);
     int portNo = 28888;
     TCPServer localserver(new TCPServerConnectionFactoryImpl<ReverseStringConnection>(), portNo);
+    cout << "Welcome to POCO TCP server running on port: " << portNo << ". Enter your string:" << endl;
     server = &localserver;
     localserver.start();
-    test(portNo);
+    //test(portNo);
     while (true);
     localserver.stop();
 }
