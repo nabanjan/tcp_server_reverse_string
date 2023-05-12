@@ -17,37 +17,41 @@ public:
     try {
       char buffer[256];
       int c = sock.receiveBytes(buffer, sizeof(buffer));
+      cout << "Value of c: " << c << endl;
       while (c > 0) {
-        sock.sendBytes(buffer, c);
+	data = data + string(buffer);
         c = sock.receiveBytes(buffer, sizeof(buffer));
+	cout << "Value of c: " << c << endl;
       }
-    } catch (Poco::Exception& exc) { 
+      cout << "Read all bytes" << endl;
+      string data(buffer);
+      reverse(data.begin(), data.end());
+      sock.sendBytes(data.c_str(), data.length());
+    } catch (Exception& exc) { 
       cerr << "ReverseStringConnection: " << exc.displayText() << endl;
     }
   }
 };
 
 int main() {
+    //TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>(), portNo);
     TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
     server.start();
+    uint portNo = server.socket().address().port();
 
-    /*uint portNo = server.socket().address().port();
-    //uint portNo = 28888;
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
     StreamSocket sock(sa);
-    */
-    cout << "Welcome to POCO TCP server. Enter your string:" << endl;
+    cout << "Welcome to POCO TCP server running on port: " << portNo << ". Enter your string:" << endl;
     while (1) {
-      /*string data;
+      string data;
       cout << "Input by a person" << endl;
       cin >> data;
-      reverse(data.begin(), data.end());
       sock.sendBytes(data.data(), (int)data.size());
       char buffer[256] = {0};
       int n = sock.receiveBytes(buffer, sizeof(buffer));
       cout << "Output by server" << endl;
-      cout << string(buffer, n) << endl; */
+      cout << string(buffer, n) << endl;
     }
 
     server.stop();
