@@ -43,7 +43,7 @@ this results in server interpreting that multiple strings are sent and so sends 
 Enter strings in the telnet session - the reverse of the string will be echoed back immediately.
 
 
-After the session, to shutdown the server, do below:
+After the session is over, to shutdown the server, do below:
 # fg
 Above will bring the tcpserver to foreground
 Now, do CTRL-C - this will shutdown the server
