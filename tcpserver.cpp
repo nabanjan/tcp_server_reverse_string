@@ -17,27 +17,26 @@ public:
     try {
       char buffer[256];
       int c = sock.receiveBytes(buffer, sizeof(buffer));
-      cout << "Value of c: " << c << endl;
       while (c > 0) {
-	data = data + string(buffer);
+        string data(buffer);
+        reverse(data.begin(), data.end());
+        sock.sendBytes(data.c_str(), data.size());
+        buffer[256] = {0};
         c = sock.receiveBytes(buffer, sizeof(buffer));
-	cout << "Value of c: " << c << endl;
       }
-      cout << "Read all bytes" << endl;
-      string data(buffer);
-      reverse(data.begin(), data.end());
-      sock.sendBytes(data.c_str(), data.length());
     } catch (Exception& exc) { 
       cerr << "ReverseStringConnection: " << exc.displayText() << endl;
     }
   }
 };
 
+
 int main() {
-    //TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>(), portNo);
-    TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
+    int portNo = 28888;
+    TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>(), portNo);
+    //TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
+    //uint portNo = server.socket().address().port();
     server.start();
-    uint portNo = server.socket().address().port();
 
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
