@@ -45,5 +45,5 @@ Enter strings in the telnet session - the reverse of the string will be echoed b
 
 After the session is over, to shutdown the server, do below:
 # fg
-Above will bring the tcpserver to foreground
+Above will bring the tcpserver to foreground.
 Now, do CTRL-C - this will shutdown the server
