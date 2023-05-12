@@ -26,6 +26,7 @@ public:
         string data(buffer);
         reverse(data.begin(), data.end());
         sock.sendBytes(data.c_str(), data.size());
+	cout << data << endl;
 	char *temp_buffer = buffer;
         buffer = new char[256];
         buffer[256] = {0};
