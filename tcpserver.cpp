@@ -57,6 +57,7 @@ void signal_callback_handler(int signum) {
    exit(signum);
 }
 
+/* TEST CODE STARTS
 void test(uint portNo) {
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
@@ -70,6 +71,7 @@ void test(uint portNo) {
       cout << string(buffer, n) << endl;
     }
 }
+*/ //TEST CODE STARTS
 
 int main() {
     signal(SIGINT, signal_callback_handler);
