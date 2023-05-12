@@ -15,13 +15,17 @@ public:
   void run() {
     StreamSocket &sock = socket();
     try {
-      char buffer[256];
+      char *buffer = new char[256];
+      buffer[256] = {0};
       int c = sock.receiveBytes(buffer, sizeof(buffer));
       while (c > 0) {
         string data(buffer);
         reverse(data.begin(), data.end());
         sock.sendBytes(data.c_str(), data.size());
+	char *temp_buffer = buffer;
+        buffer = new char[256];
         buffer[256] = {0};
+	delete [] temp_buffer;
         c = sock.receiveBytes(buffer, sizeof(buffer));
       }
     } catch (Exception& exc) { 
@@ -30,14 +34,16 @@ public:
   }
 };
 
-
 int main() {
     int portNo = 28888;
     TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>(), portNo);
-    //TCPServer server(new TCPServerConnectionFactoryImpl<ReverseStringConnection>());
-    //uint portNo = server.socket().address().port();
     server.start();
 
+    test(portNo);
+}
+
+
+void test(uint portNo) {
     SocketAddress sa("localhost", portNo);
     cout << "Port no. to be assigned: " << portNo << endl;
     StreamSocket sock(sa);
